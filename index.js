@@ -44,13 +44,13 @@ bot.on('message', msg => {
 
     if (msg.content === prefix + "experience") {
         if(msg.member.roles.get(process.env.DIEGLOCKE)) {
-            msg.reply(`Vous n'avez pas accès à la commande du Die Glocke`);
-            console.log(`Une personne non-conviée a essayée d'utiliser la commande !experience.`)
+            msg.reply("Nombres d'experiences :" + experience['Experience'].experience);
+            console.log(`Une personne a pu voir le nombre d'experience faites pas la Die Glocke.`)
         }
         else
         {
-            msg.reply("Nombres d'experiences :" + experience['Experience'].experience);
-            console.log(`Une personne a pu voir le nombre d'experience faites pas la Die Glocke.`)
+            msg.reply(`Vous n'avez pas accès à la commande du Die Glocke`);
+            console.log(`Une personne non-conviée a essayée d'utiliser la commande !experience.`)
         }
 
     }
