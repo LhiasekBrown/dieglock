@@ -56,7 +56,7 @@ bot.on('message', msg => {
     }
 
     if (msg.content === "+1") {
-        if(msg.member.roles.get('494590843966062613")) {
+        if(msg.member.roles.get('494590843966062613')) {
             msg.reply(`Vous n'avez pas accès à la commande du Die Glocke`);
             console.log(`Une personne non-conviée a essayée d'utiliser la commande +1.`)
         }
