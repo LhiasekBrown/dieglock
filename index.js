@@ -2,14 +2,17 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const bot = new Discord.Client();
+const guildMember = msg.member
 
-//JSON Files
-let experience = JSON.parse(fs.readFileSync('JSON/experience.json', 'utf8'));
 
 bot.on('guildMemberAdd', member => {
     let channel = member.guild.channels.find('name', 'bienvenue');
     let memberavatar = member.user.avatarURL
-        if (!channel) return;
+    
+    guildMember.addroles([process.env.USER])
+    console.log(`L'utilisateur` + member.user.username + `a rejoint le projet Die Glocke.`)
+
+    if (!channel) return;
         let embed = new Discord.RichEmbed()
         .setColor('RANDOM')
         .setThumbnail(memberavatar)
@@ -30,44 +33,27 @@ bot.on('ready', () => {
 
 bot.on('message', msg => {
     //Constante en lien avec les messages
-    const guildMember = msg.member;
-    
-    // Créer l'accès au nombre d'experience de la Die Glocke
-    if (!experience['Experience']) experience['Experience'] = {}
-    if (!experience['Experience'].experience) experience['Experience'].experience = 0.
+    let schannel = member.guild.channels.find('name', 'annonce');
 
-    let prefix = "!";
-
-    fs.writeFile('JSON/experience.json', JSON.stringify(experience), (err) => {
-        if (err) console.error (err);
-    })
-
-    if (msg.content === prefix + "experience") {
-        if(msg.member.roles.get('494590843966062613')) {
-            msg.reply(`Vous n'avez pas accès à la commande du Die Glocke`);
-            console.log(`Une personne non-conviée a essayée d'utiliser la commande !experience.`)
+    if(message.content === prefix + "Reunion") {
+        if(msg.member.roles.get(process.env.DIEGLOCKE)) {
+            msg.reply("Vous n'avez pas accès à cette commande.");
+            console.log('Une personne non-conviée a essayer : !reunion.')
         }
         else
         {
-            msg.reply("Nombres d'experiences :" + experience['Experience'].experience);
-            console.log(`Une personne a pu voir le nombre d'experience faites pas la Die Glocke.`)
-        }
-
+            if(!schannel) return;
+                let sembed = new Discord.RichEmbed()
+                .setColor('RANDOM')
+                .setThumbnail(bot.avatarURL)
+                .addField(message.author.username + "démarre une réunion, qui débutera dans 10 minutes.")
+                .addField('Rejoignez le canal prévu à cet effet, ou prévenez de votre absence.')
+                .setFooter(`**${member.guild.name}**`)
+                .setTimestamp()
+                
+                channel.sendEmbed(sembed)
+        }    
     }
-
-    if (msg.content === "+1") {
-        if(msg.member.roles.get('494590843966062613')) {
-            msg.reply(`Vous n'avez pas accès à la commande du Die Glocke`);
-            console.log(`Une personne non-conviée a essayée d'utiliser la commande +1.`)
-        }
-        else
-        {
-            msg.reply('1 Experience a bien été ajouté au nombre total.')
-            experience['Experience'].experience += 1;
-            msg.reply("Nombres d'experiences :" + experience['Experience'].experience);
-        }
-    }
-
 });
 
 bot.login(process.env.TOKEN);
