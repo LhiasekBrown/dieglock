@@ -2,6 +2,8 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const bot = new Discord.Client();
+const guildMember = msg.member;
+
 
 bot.on('guildMemberAdd', member => {
     var role = member.guild.roles.find('name', 'Nouveau');
@@ -31,8 +33,9 @@ bot.on('ready', () => {
 });
 
 bot.on('message', msg => {
+	let prefix = "!";
 	
-    if(msg.content === prefix + "Reunion") {
+    if(message.content === prefix + "Reunion") {
         if(msg.member.roles.get(process.env.DIEGLOCKE)) {
             msg.reply("Vous n'avez pas accès à cette commande.");
             console.log('Une personne non-conviée a essayer : !reunion.')
