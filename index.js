@@ -2,8 +2,6 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const bot = new Discord.Client();
-const guildMember = message.member;
-
 
 bot.on('guildMemberAdd', member => {
     let channel = member.guild.channels.find('name', 'bienvenue');
@@ -34,6 +32,7 @@ bot.on('ready', () => {
 bot.on('message', msg => {
     //Constante en lien avec les messages
     let schannel = member.guild.channels.find('name', 'annonce');
+    const guildMember = message.member;
 
     if(message.content === prefix + "Reunion") {
         if(msg.member.roles.get(process.env.DIEGLOCKE)) {
