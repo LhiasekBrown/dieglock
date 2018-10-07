@@ -34,7 +34,7 @@ bot.on('ready', () => {
 bot.on('message', msg => {
 	let prefix = "!";
 	
-    if(message.content === prefix + "Reunion") {
+    if (msg === prefix + "Reunion") {
         if(msg.member.roles.get(process.env.DIEGLOCKE)) {
             msg.reply("Vous n'avez pas accès à cette commande.");
             console.log('Une personne non-conviée a essayer : !reunion.')
