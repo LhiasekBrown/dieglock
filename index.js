@@ -2,7 +2,7 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const bot = new Discord.Client();
-const guildMember = msg.member
+const guildMember = msg.member;
 
 
 bot.on('guildMemberAdd', member => {
