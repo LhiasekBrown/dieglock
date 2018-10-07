@@ -6,10 +6,11 @@ const guildMember = msg.member;
 
 
 bot.on('guildMemberAdd', member => {
-    let channel = member.guild.channels.find('name', 'bienvenue');
+    var role = member.guild.roles.find('name', 'Nouveau');
+	let channel = member.guild.channels.find('name', 'bienvenue');
     let memberavatar = member.user.avatarURL
     
-    guildMember.addroles([process.env.USER])
+    member.addRole(role)
     console.log(`L'utilisateur` + member.user.username + `a rejoint le projet Die Glocke.`)
 
     if (!channel) return;
@@ -32,10 +33,8 @@ bot.on('ready', () => {
 });
 
 bot.on('message', msg => {
-    //Constante en lien avec les messages
-    let schannel = member.guild.channels.find('name', 'annonce');
-
-    if(message.content === prefix + "Reunion") {
+	
+    if(msg.content === prefix + "Reunion") {
         if(msg.member.roles.get(process.env.DIEGLOCKE)) {
             msg.reply("Vous n'avez pas accès à cette commande.");
             console.log('Une personne non-conviée a essayer : !reunion.')
