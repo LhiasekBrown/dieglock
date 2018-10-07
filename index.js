@@ -5,13 +5,9 @@ const bot = new Discord.Client();
 
 
 bot.on('guildMemberAdd', member => {
-    var role = member.guild.roles.find('name', 'Nouveau');
-	let channel = member.guild.channels.find('name', 'bienvenue');
+    let channel = member.guild.channels.find('name', 'bienvenue');
     let memberavatar = member.user.avatarURL
     
-    member.addRole(role)
-    console.log(`L'utilisateur` + member.user.username + `a rejoint le projet Die Glocke.`)
-
     if (!channel) return;
         let embed = new Discord.RichEmbed()
         .setColor('RANDOM')
@@ -32,19 +28,6 @@ bot.on('ready', () => {
 });
 
 bot.on('message', msg => {
-	let prefix = "!";
-	
-    if (msg === prefix + "Reunion") {
-        if(msg.member.roles.get(process.env.DIEGLOCKE)) {
-            msg.reply("Vous n'avez pas accès à cette commande.");
-            console.log('Une personne non-conviée a essayer : !reunion.')
-        }
-        else
-        {
-			msg.reply('Une réunion a été lancée dans le channel vocal : Réunion')
-           
-        }    
-    }
 });
 
 bot.login(process.env.TOKEN);
