@@ -2,6 +2,8 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const bot = new Discord.Client();
+const guildMember = msg.member;
+
 
 bot.on('guildMemberAdd', member => {
     let channel = member.guild.channels.find('name', 'bienvenue');
@@ -32,7 +34,6 @@ bot.on('ready', () => {
 bot.on('message', msg => {
     //Constante en lien avec les messages
     let schannel = member.guild.channels.find('name', 'annonce');
-    const guildMember = message.member;
 
     if(message.content === prefix + "Reunion") {
         if(msg.member.roles.get(process.env.DIEGLOCKE)) {
@@ -41,16 +42,8 @@ bot.on('message', msg => {
         }
         else
         {
-            if(!schannel) return;
-                let sembed = new Discord.RichEmbed()
-                .setColor('RANDOM')
-                .setThumbnail(bot.avatarURL)
-                .addField(message.author.username + "démarre une réunion, qui débutera dans 10 minutes.")
-                .addField('Rejoignez le canal prévu à cet effet, ou prévenez de votre absence.')
-                .setFooter(`**${member.guild.name}**`)
-                .setTimestamp()
-                
-                channel.sendEmbed(sembed)
+			msg.reply('Une réunion a été lancée dans le channel vocal : Réunion')
+           
         }    
     }
 });
